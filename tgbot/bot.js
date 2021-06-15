@@ -17,7 +17,7 @@ function state(ctx){
   	.then(data=>{
   		var len = Object.keys(data['sessions']).length;
   		for(i=0;i<len-2;i++){
-  			if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']<45){
+  			if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']<40){
   				bot.telegram.sendMessage(ctx.chat.id,'available');
 				  break;
   			}
