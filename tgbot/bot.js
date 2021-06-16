@@ -3,14 +3,14 @@ const fetch = require("node-fetch");
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.tgbot_js);
 
-function state(ctx){
+function state(ctx,id){
 	const today = new Date()
 	const tomorrow = new Date(today)
 	tomorrow.setDate(tomorrow.getDate() + 1)
 	var d = tomorrow.getDate();
 	var d1 = today.getDate();
-	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=300&date=${d}-06-2021`;
-	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=300&date=${d1}-06-2021`;
+	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d}-06-2021`;
+	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d1}-06-2021`;
 	fetch(sturl , {
       credentials: 'include',
       method: 'GET',
@@ -46,10 +46,87 @@ function state(ctx){
 	setTimeout(function(){ state(ctx) }, 100000);
 };
 bot.start((ctx) => {
-	ctx.reply("started");
-	state(ctx);
+	
+	ctx.telegram.sendMessage(ctx.chat.id,'select District',
+	{
+		reply_markup:{
+			inline_keyboard: [
+				[{text: 'Pathanamthitta', callback_data: 'pta'}],
+				[{text: 'Thiruvananthapuram', callback_data: 'tvm'}],
+				[{text: 'kollam', callback_data: 'klm'}],
+				[{text: 'Ernakulam', callback_data: 'ekm'}],
+				[{text: 'Palakkad', callback_data: 'pkd'}],
+				[{text: 'Thrissur', callback_data: 'tsr'}],
+				[{text: 'Kozhikode', callback_data: 'kkd'}],
+				[{text: 'Kasargode', callback_data: 'kgd'}],
+				[{text: 'Aleppuzha', callback_data: 'apy'}],
+				[{text: 'Kottayam', callback_data: 'ktm'}],
+				[{text: 'Idukki', callback_data: 'idk'}],
+				[{text: 'Malappuram', callback_data: 'mlp'}],
+				[{text: 'Wayanad', callback_data: 'wyd'}],
+				[{text: 'Kannur', callback_data: 'knr'}]
+			]
+		}
+	})
+	//state(ctx);
 	//console.log(ctx.chat.id);
 	
 })
-
+bot.action('pta', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,300);
+})
+bot.action('tvm', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,296);
+})
+bot.action('klm', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,298);
+})
+bot.action('pkd', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,308);
+})
+bot.action('tsr', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,303);
+})
+bot.action('kkd', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,305);
+})
+bot.action('kgd', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,295);
+})
+bot.action('apy', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,301);
+})
+bot.action('ktm', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,304);
+})
+bot.action('idk', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,306);
+})
+bot.action('mlp', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,302);
+})
+bot.action('wyd', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,299);
+})
+bot.action('knr', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,297);
+})
+bot.action('ekm', (ctx)=>{
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
+	state(ctx,307);
+})
+// bot.stop(reason = 'unspecified')
 bot.launch();
