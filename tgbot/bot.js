@@ -19,9 +19,9 @@ function state(ctx,id){
   	.then(data=>{
   		var len = Object.keys(data['sessions']).length;
   		for(i=0;i<len-1;i++){
-  			if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
+  			if(data['sessions'][i]['available_capacity_dose1']==0 && data['sessions'][i]['min_age_limit']==18){
   				bot.telegram.sendMessage(ctx.chat.id,'available tomorrow');
-				  break;
+				  return;
   			}
   		}
   	})
@@ -128,5 +128,5 @@ bot.action('ekm', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,307);
 })
-stop(reason = 'unspecified')
+
 bot.launch();
