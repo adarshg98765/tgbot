@@ -9,8 +9,10 @@ function state(ctx,id){
 	tomorrow.setDate(tomorrow.getDate() + 1)
 	var d = tomorrow.getDate();
 	var d1 = today.getDate();
-	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d}-06-2021`;
-	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d1}-06-2021`;
+	var m = tomorrow.getMonth()+1;
+	var m1 = today.getMonth()+1;
+	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d}-${m}-2021`;
+	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d1}-${m1}-2021`;
 	fetch(sturl , {
 		credentials: 'include',
 		method: 'GET',
@@ -19,8 +21,8 @@ function state(ctx,id){
 		.then(data=>{
 			var len = Object.keys(data['sessions']).length;
 			for(i=0;i<len-1;i++){
-				if(data['sessions'][i]['available_capacity_dose1']==0 && data['sessions'][i]['min_age_limit']==18){
-					bot.telegram.sendMessage(ctx.chat.id,'available tomorrow');
+				if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
+					bot.telegram.sendMessage(ctx.chat.id,'Vaccine available tomorrow');
 					bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
 					return;
 				}
@@ -37,7 +39,7 @@ function state(ctx,id){
 			var len = Object.keys(data['sessions']).length;
 			for(i=0;i<len-1;i++){
 				if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
-					bot.telegram.sendMessage(ctx.chat.id,'Available today');
+					bot.telegram.sendMessage(ctx.chat.id,'Vaccine available today');
 					bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
 					return;
 				}
