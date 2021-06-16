@@ -128,8 +128,5 @@ bot.action('ekm', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,307);
 })
-stop(reason = 'unspecified'){
-	this.webhookServer?.close()
-    this.polling?.stop()
-}
+stop(reason = 'unspecified')
 bot.launch();
