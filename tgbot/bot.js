@@ -47,7 +47,7 @@ function state(ctx,id){
 		})
 	.catch(err=>{});
 
-	setTimeout(function(){ state(ctx) }, 100000);
+	setTimeout(function(){ state(ctx,id) }, 100000);
 };
 bot.start((ctx) => {
 	
