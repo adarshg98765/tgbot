@@ -47,7 +47,7 @@ function state(ctx,id){
 		})
 	.catch(err=>{});
 	bot.telegram.sendMessage(ctx.chat.id,'checking');
-	setTimeout(function(){ state(ctx,id) }, 100000);
+	setTimeout(function(){ state(ctx,id) }, 10000);
 };
 bot.start((ctx) => {
 	
