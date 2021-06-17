@@ -81,55 +81,55 @@ bot.action('pta', (ctx)=>{
 	state(ctx,300);
 })
 bot.action('tvm', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,296);
 })
 bot.action('klm', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,298);
 })
 bot.action('pkd', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,308);
 })
 bot.action('tsr', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,303);
 })
 bot.action('kkd', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,305);
 })
 bot.action('kgd', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,295);
 })
 bot.action('apy', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,301);
 })
 bot.action('ktm', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,304);
 })
 bot.action('idk', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,306);
 })
 bot.action('mlp', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,302);
 })
 bot.action('wyd', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,299);
 })
 bot.action('knr', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,297);
 })
 bot.action('ekm', (ctx)=>{
-	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availabilitS');
+	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
 	state(ctx,307);
 })
 
