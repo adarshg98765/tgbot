@@ -20,10 +20,10 @@ function state(ctx,id){
 			.then(response=>response.json())
 			.then(data=>{
 				var length = Object.keys(data['centers']).length;
-				console.log(length);
 				for(i=0;i<length;i++){
 					var len = Object.keys(data['centers'][i]['sessions']).length;
 					for(j=0;j<len;j++){
+						console.log(data['centers'][i]['sessions'][j]['available_capacity_dose1']);
 						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available tomorrow');
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
@@ -40,10 +40,10 @@ function state(ctx,id){
 			.then(response=>response.json())
 			.then(data=>{
 				var length = Object.keys(data['centers']).length;
-				console.log(length);
 				for(i=0;i<length;i++){
 					var len = Object.keys(data['centers'][i]['sessions']).length;
 					for(j=0;j<len;j++){
+						console.log(data['centers'][i]['sessions'][j]['available_capacity_dose1']);
 						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available today');
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
