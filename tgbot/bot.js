@@ -2,7 +2,7 @@ require('dotenv').config();
 const fetch = require("node-fetch");
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.tgbot_js);
-
+ex :
 function state(ctx,id){
 	const today = new Date()
 	const tomorrow = new Date(today)
@@ -27,7 +27,7 @@ function state(ctx,id){
 						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available tomorrow');
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
-						return;
+						break ex;
 					}
 					}
 				}
@@ -47,7 +47,7 @@ function state(ctx,id){
 						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available today');
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
-						return;
+						break ex;
 					}
 					}
 				}
