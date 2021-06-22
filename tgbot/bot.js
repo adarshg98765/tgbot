@@ -2,7 +2,7 @@ require('dotenv').config();
 const fetch = require("node-fetch");
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.tgbot_js);
-ex :
+ex:
 function state(ctx,id){
 	const today = new Date()
 	const tomorrow = new Date(today)
