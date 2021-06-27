@@ -53,8 +53,14 @@ function state(ctx,id){
 				}
 			})
 	.catch(err=>{});
-	setTimeout(function(){ state(ctx,id) }, 100000);
+	
 };
+function strt(ctx,id){
+	for (let i = 0; i < 1200; i++) {
+		setTimeout(function () {state(ctx,id)}, 30000);
+	}
+};
+
 bot.start((ctx) => {
 	
 	ctx.telegram.sendMessage(ctx.chat.id,'select District',
@@ -84,59 +90,59 @@ bot.start((ctx) => {
 })
 bot.action('pta', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'Started finding vaccine availability');
-	state(ctx,300);
+	strt(ctx,300);
 })
 bot.action('tvm', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,296);
+	strt(ctx,296);
 })
 bot.action('klm', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,298);
+	strt(ctx,298);
 })
 bot.action('pkd', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,308);
+	strt(ctx,308);
 })
 bot.action('tsr', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,303);
+	strt(ctx,303);
 })
 bot.action('kkd', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,305);
+	strt(ctx,305);
 })
 bot.action('kgd', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,295);
+	strt(ctx,295);
 })
 bot.action('apy', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,301);
+	strt(ctx,301);
 })
 bot.action('ktm', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,304);
+	strt(ctx,304);
 })
 bot.action('idk', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,306);
+	strt(ctx,306);
 })
 bot.action('mlp', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,302);
+	strt(ctx,302);
 })
 bot.action('wyd', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,299);
+	strt(ctx,299);
 })
 bot.action('knr', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,297);
+	strt(ctx,297);
 })
 bot.action('ekm', (ctx)=>{
 	ctx.telegram.sendMessage(ctx.chat.id, 'started finding vaccine availability');
-	state(ctx,307);
+	strt(ctx,307);
 })
 
 bot.launch();
