@@ -15,7 +15,7 @@ function state(ctx,id){
 	var d1 = today.getDate();
 	var m = tomorrow.getMonth()+1;
 	var m1 = today.getMonth()+1;
-	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${id}&date=${d}-${m}-2021`;
+	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d}-${m}-2021`;
 	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${id}&date=${d1}-${m1}-2021`;
 	fetch(sturl,{
 		credentials: 'include',
@@ -23,18 +23,16 @@ function state(ctx,id){
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
-				var length = Object.keys(data['centers']).length;
+				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
-					var len = Object.keys(data['centers'][i]['sessions']).length;
-					for(j=0;j<len;j++){
-						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
-						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
+					// var len = Object.keys(data['centers'][i]['sessions']).length;
+					if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
+						bot.telegram.sendMessage(ctx.chat.id,`${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
 						if(flag===0){
 							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available tomorrow');
 						}
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
 						flag = 1;
-					}
 					}
 				}
 			})
@@ -45,18 +43,16 @@ function state(ctx,id){
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
-				var length = Object.keys(data['centers']).length;
+				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
-					var len = Object.keys(data['centers'][i]['sessions']).length;
-					for(j=0;j<len;j++){
-						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
-						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
-						if (flag1 === 0) {
-							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available today');
+					// var len = Object.keys(data['centers'][i]['sessions']).length;
+					if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
+						bot.telegram.sendMessage(ctx.chat.id,`${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
+						if(flag===0){
+							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available tomorrow');
 						}
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
-						flag1 = 1;
-					}
+						flag = 1;
 					}
 				}
 			})
