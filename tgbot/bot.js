@@ -62,10 +62,10 @@ function state(ctx,id){
 	return flag+flag1;
 	
 };
-function strt(ctx,id){
+async function strt(ctx,id){
 	for (let i = 0; i < 1200; i++) {
 		x = state(ctx, id);
-		setTimeout(function () {}, 30000);
+		await sleep(30000);
 		if(x>0){
 			break;
 		}
