@@ -16,7 +16,7 @@ function state(ctx,id){
 	var m = tomorrow.getMonth()+1;
 	var m1 = today.getMonth()+1;
 	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d}-${m}-2021`;
-	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${id}&date=${d1}-${m1}-2021`;
+	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d1}-${m1}-2021`;
 	fetch(sturl,{
 		credentials: 'include',
 			method: 'GET',
