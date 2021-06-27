@@ -2,7 +2,9 @@ require('dotenv').config();
 const fetch = require("node-fetch");
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.tgbot_js);
-
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 function state(ctx,id){
 	flag =0;
 	flag1 =0;
