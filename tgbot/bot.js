@@ -6,8 +6,8 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 function state(ctx,id){
-	flag =0;
-	flag1 =0;
+	var flag =0;
+	var flag1 =0;
 	const today = new Date()
 	const tomorrow = new Date(today)
 	tomorrow.setDate(tomorrow.getDate() + 1)
@@ -29,7 +29,7 @@ function state(ctx,id){
 					for(j=0;j<len;j++){
 						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
-						if(flag==0){
+						if(flag===0){
 							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available tomorrow');
 						}
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
@@ -51,7 +51,7 @@ function state(ctx,id){
 					for(j=0;j<len;j++){
 						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
-						if (flag1 == 0) {
+						if (flag1 === 0) {
 							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available today');
 						}
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
@@ -66,7 +66,7 @@ function state(ctx,id){
 };
 async function strt(ctx,id){
 	for (let i = 0; i < 1200; i++) {
-		x = state(ctx, id);
+		var x = state(ctx, id);
 		await sleep(30000);
 		if(x>0){
 			break;
