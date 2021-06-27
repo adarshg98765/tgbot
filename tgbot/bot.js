@@ -4,6 +4,8 @@ const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.tgbot_js);
 
 function state(ctx,id){
+	flag =0;
+	flag1 =0;
 	const today = new Date()
 	const tomorrow = new Date(today)
 	tomorrow.setDate(tomorrow.getDate() + 1)
@@ -25,9 +27,11 @@ function state(ctx,id){
 					for(j=0;j<len;j++){
 						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
-						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available tomorrow');
+						if(flag==0){
+							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available tomorrow');
+						}
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
-						return;
+						flag = 1;
 					}
 					}
 				}
@@ -45,19 +49,26 @@ function state(ctx,id){
 					for(j=0;j<len;j++){
 						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
-						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available today');
+						if (flag1 == 0) {
+							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available today');
+						}
 						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
-						return;
+						flag1 = 1;
 					}
 					}
 				}
 			})
 	.catch(err=>{});
+	return flag+flag1;
 	
 };
 function strt(ctx,id){
 	for (let i = 0; i < 1200; i++) {
-		setTimeout(function () {state(ctx,id)}, 30000);
+		x = state(ctx, id);
+		setTimeout(function () {}, 30000);
+		if(x>0){
+			break;
+		}
 	}
 };
 
