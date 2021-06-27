@@ -61,7 +61,7 @@ function state(ctx,id){
 	
 };
 async function strt(ctx,id){
-	for (let i = 0; i < 1200; i++) {
+	for (let i = 0; i < 3000; i++) {
 		var x = state(ctx, id);
 		console.log(x);
 		await sleep(30000);
