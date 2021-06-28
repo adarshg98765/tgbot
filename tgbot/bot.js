@@ -6,8 +6,6 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 function state(ctx,id){
-	var flag =0;
-	var flag1 =0;
 	const today = new Date()
 	const tomorrow = new Date(today)
 	tomorrow.setDate(tomorrow.getDate() + 1)
@@ -25,14 +23,10 @@ function state(ctx,id){
 			.then(data=>{
 				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
-					// var len = Object.keys(data['centers'][i]['sessions']).length;
 					if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
-						bot.telegram.sendMessage(ctx.chat.id,`${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
-						if(flag===0){
-							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available tomorrow');
-						}
-						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
-						flag = 1;
+						bot.telegram.sendMessage(ctx.chat.id,`Vaccine available tomorrow -- ${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
+						bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
+						return 1;
 					}
 				}
 			})
@@ -45,27 +39,22 @@ function state(ctx,id){
 			.then(data=>{
 				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
-					// var len = Object.keys(data['centers'][i]['sessions']).length;
 					if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
-						bot.telegram.sendMessage(ctx.chat.id,`${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
-						if(flag===0){
-							bot.telegram.sendMessage(ctx.chat.id, 'Vaccine available tomorrow');
-						}
-						bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
-						flag = 1;
+						bot.telegram.sendMessage(ctx.chat.id,`Vaccine available tomorrow -- ${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
+						bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
+						return 1;
 					}
 				}
 			})
 	.catch(err=>{});
-	return flag+flag1;
-	
+	return fetch();
 };
 async function strt(ctx,id){
 	for (let i = 0; i < 3000; i++) {
 		var x = state(ctx, id);
 		console.log(x);
 		await sleep(30000);
-		if(x>0){
+		if(x==1){
 			break;
 		}
 	}
