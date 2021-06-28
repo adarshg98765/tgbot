@@ -15,46 +15,52 @@ function state(ctx,id){
 	var m1 = today.getMonth()+1;
 	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d}-${m}-2021`;
 	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d1}-${m1}-2021`;
-	fetch(sturl,{
+	const x = fetch(sturl,{
 		credentials: 'include',
 			method: 'GET',
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
+				flag =0;
 				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
+					
 					if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`Vaccine available tomorrow -- ${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
-						return 1;
+						flag = 1;
 					}
 				}
+				return flag;
 			})
 	.catch(err=>{});
-	fetch(sturl1,{
+	const y = fetch(sturl1,{
 		credentials: 'include',
 			method: 'GET',
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
+				flag =0;
 				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
+					
 					if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`Vaccine available tomorrow -- ${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
-						return 1;
+						flag = 1;
 					}
 				}
+				return flag;
 			})
 	.catch(err=>{});
-	return fetch();
+	return x+y;
 };
 async function strt(ctx,id){
 	for (let i = 0; i < 3000; i++) {
 		var x = state(ctx, id);
 		console.log(x);
 		await sleep(30000);
-		if(x==1){
+		if(x>0){
 			break;
 		}
 	}
