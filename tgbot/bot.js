@@ -5,6 +5,8 @@ const bot = new Telegraf(process.env.tgbot_js);
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
+flag = 0;
+flag1 = 0;
 function state(ctx,id){
 	const today = new Date()
 	const tomorrow = new Date(today)
@@ -15,13 +17,12 @@ function state(ctx,id){
 	var m1 = today.getMonth()+1;
 	const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d}-${m}-2021`;
 	const sturl1 = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${d1}-${m1}-2021`;
-	const x = fetch(sturl,{
+	fetch(sturl,{
 		credentials: 'include',
 			method: 'GET',
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
-				flag =0;
 				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
 					
@@ -31,29 +32,26 @@ function state(ctx,id){
 						flag = 1;
 					}
 				}
-				return flag;
 			})
 	.catch(err=>{});
-	const y = fetch(sturl1,{
+	fetch(sturl1,{
 		credentials: 'include',
 			method: 'GET',
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
-				flag =0;
 				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
 					
 					if(data['sessions'][i]['available_capacity_dose1']>0 && data['sessions'][i]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`Vaccine available tomorrow -- ${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
-						flag = 1;
+						flag1 = 1;
 					}
 				}
-				return flag;
 			})
 	.catch(err=>{});
-	return x+y;
+	return flag+flag1;
 };
 async function strt(ctx,id){
 	for (let i = 0; i < 3000; i++) {
