@@ -5,9 +5,9 @@ const bot = new Telegraf(process.env.tgbot_js);
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
-flag = 0;
-flag1 = 0;
 function state(ctx,id){
+	flag = 0;
+	flag1 = 0;
 	const today = new Date()
 	const tomorrow = new Date(today)
 	tomorrow.setDate(tomorrow.getDate() + 1)
