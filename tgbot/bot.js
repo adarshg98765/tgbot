@@ -65,12 +65,13 @@ async function strt(ctx,id){
 	for (let i = 0; i < 3000; i++) {
 		var x = state(ctx, id);
 		console.log(x);
-		await sleep(3000);
+		await sleep(30000);
 		if(x>0){
 			break;
 		}
 	}
 };
+
 bot.start((ctx) => {
 	
 	ctx.telegram.sendMessage(ctx.chat.id,'select District',
