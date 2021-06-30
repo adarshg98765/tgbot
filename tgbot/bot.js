@@ -65,7 +65,10 @@ async function strt(ctx,id){
 	for (let i = 0; i < 3000; i++) {
 		var x = state(ctx, id);
 		console.log(x);
-		await sleep(30000);
+		await bot.command('/stop' , (ctx)=>{
+			break;
+		});
+		await sleep(3000);
 		if(x>0){
 			break;
 		}
