@@ -48,7 +48,7 @@ function state(ctx,id){
 				for(i=0;i<length;i++){
 					var len = Object.keys(data['centers'][i]['sessions']).length;
 					for(j=0;j<len;j++){
-						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
+						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']==0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available today');
 						bot.telegram.sendMessage(ctx.chat.id,`available dose - ${data['centers'][i]['sessions'][j]['available_capacity_dose1']}`);
@@ -65,16 +65,12 @@ async function strt(ctx,id){
 	for (let i = 0; i < 3000; i++) {
 		var x = state(ctx, id);
 		console.log(x);
-		await bot.command('/stop' , (ctx)=>{
-			break;
-		});
 		await sleep(3000);
 		if(x>0){
 			break;
 		}
 	}
 };
-
 bot.start((ctx) => {
 	
 	ctx.telegram.sendMessage(ctx.chat.id,'select District',
