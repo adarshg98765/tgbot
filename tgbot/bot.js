@@ -30,7 +30,7 @@ function state(ctx,id){
 						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available tomorrow');
 						bot.telegram.sendMessage(ctx.chat.id,`${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,`available dose1 -- ${data['sessions'][i]['available_capacity_dose1']}`);
-						bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
+						//bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
 						flag = 1;
 					}
 				}
@@ -49,7 +49,7 @@ function state(ctx,id){
 						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available today');
 						bot.telegram.sendMessage(ctx.chat.id,`${data['sessions'][i]['name']}   ${data['sessions'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,`available dose1 -- ${data['sessions'][i]['available_capacity_dose1']}`);
-						bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
+						//bot.telegram.sendMessage(ctx.chat.id,'To continue searching type /start');
 						flag1 = 1;
 					}
 				}
