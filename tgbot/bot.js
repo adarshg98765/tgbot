@@ -5,9 +5,10 @@ const bot = new Telegraf(process.env.tgbot_js);
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
+var flag,flag1;
 function state(ctx,id){
-	flag = 0;
-	flag1 = 0;
+	flag=0;
+	flag1=0;
 	const today = new Date()
 	const tomorrow = new Date(today)
 	tomorrow.setDate(tomorrow.getDate() + 1)
@@ -23,8 +24,7 @@ function state(ctx,id){
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
-				console.log(data);
-				var length = Object.keys(data['sessions']).length;
+				var length = Object.keys(data['centers']).length;
 				for(i=0;i<length;i++){
 					var len = Object.keys(data['centers'][i]['sessions']).length;
 					for(j=0;j<len;j++){
@@ -45,11 +45,11 @@ function state(ctx,id){
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
-				var length = Object.keys(data['sessions']).length;
+				var length = Object.keys(data['centers']).length;
 				for(i=0;i<length;i++){
 					var len = Object.keys(data['centers'][i]['sessions']).length;
 					for(j=0;j<len;j++){
-						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']==0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
+						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 						bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
 						bot.telegram.sendMessage(ctx.chat.id,'Vaccine available today');
 						bot.telegram.sendMessage(ctx.chat.id,`available dose - ${data['centers'][i]['sessions'][j]['available_capacity_dose1']}`);
