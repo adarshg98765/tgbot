@@ -23,6 +23,7 @@ function state(ctx,id){
 			headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
 			.then(response=>response.json())
 			.then(data=>{
+				console.log(data);
 				var length = Object.keys(data['sessions']).length;
 				for(i=0;i<length;i++){
 					var len = Object.keys(data['centers'][i]['sessions']).length;
