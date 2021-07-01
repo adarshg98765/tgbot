@@ -25,7 +25,7 @@ function state(ctx,id){
 					for(i=0;i<length;i++){
 						var len = Object.keys(data['centers'][i]['sessions']).length;
 						for(j=0;j<len;j++){
-							if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
+							if(data['centers'][i]['sessions'][j]['available_capacity_dose2']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 							bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
 							bot.telegram.sendMessage(ctx.chat.id,`Vaccine available on ${dd}-${mm}-2021`);
 							bot.telegram.sendMessage(ctx.chat.id,`available dose - ${data['centers'][i]['sessions'][j]['available_capacity_dose1']}`);
