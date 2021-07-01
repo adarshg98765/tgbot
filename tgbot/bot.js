@@ -9,9 +9,9 @@ var flag,flag1;
 function state(ctx,id){
 	flag=0;
 	flag1=0;
-	for(i=0;i<7;i++){
+	for(t=0;t<7;t++){
 		const day = new Date();
-		day.setDate(day.getDate()+i);
+		day.setDate(day.getDate()+t);
 		var dd = day.getDate();
 		var mm = day.getMonth()+1;
 		const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${id}&date=${dd}-${mm}-2021`;
