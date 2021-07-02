@@ -15,6 +15,7 @@ function state(ctx,id){
 		var dd = day.getDate();
 		var mm = day.getMonth()+1;
 		const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${id}&date=${dd}-${mm}-2021`;
+		console.log(sturl);
 		fetch(sturl,{
 			credentials: 'include',
 				method: 'GET',
@@ -93,7 +94,6 @@ function state(ctx,id){
 async function strt(ctx,id){
 	for (let i = 0; i < 3000; i++) {
 		var x = state(ctx, id);
-		console.log(x);
 		await sleep(30000);
 		if(x>0){
 			break;
