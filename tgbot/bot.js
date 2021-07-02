@@ -9,26 +9,25 @@ var flag,flag1;
 function state(ctx,id){
 	flag=0;
 	flag1=0;
-	for(t=0;t<7;t++){
+	for(t=0;t<5;t++){
 		const day = new Date();
 		day.setDate(day.getDate()+t);
 		var dd = day.getDate();
 		var mm = day.getMonth()+1;
 		const sturl = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${id}&date=${dd}-${mm}-2021`;
-		console.log(sturl);
 		fetch(sturl,{
 			credentials: 'include',
 				method: 'GET',
 				headers: {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}})
-				.then(response=>response.json())
-				.then(data=>{
-					var length = Object.keys(data['centers']).length;
-					for(i=0;i<length;i++){
-						var len = Object.keys(data['centers'][i]['sessions']).length;
-						for(j=0;j<len;j++){
-							if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
+		.then(response=>response.json())
+		.then(data=>{
+			var length = Object.keys(data['centers']).length;
+				for(i=0;i<length;i++){
+					var len = Object.keys(data['centers'][i]['sessions']).length;
+					for(j=0;j<len;j++){
+						if(data['centers'][i]['sessions'][j]['available_capacity_dose1']>0 && data['centers'][i]['sessions'][j]['min_age_limit']==18){
 							bot.telegram.sendMessage(ctx.chat.id,`${data['centers'][i]['name']}   ${data['centers'][i]['address']}`);
-							bot.telegram.sendMessage(ctx.chat.id,`Vaccine available on ${dd}-${mm}-2021`);
+							bot.telegram.sendMessage(ctx.chat.id,`Vaccine available on ${data['centers'][i]['sessions'][j]['date']}`);
 							bot.telegram.sendMessage(ctx.chat.id,`available dose - ${data['centers'][i]['sessions'][j]['available_capacity_dose1']}`);
 							//bot.telegram.sendMessage(ctx.chat.id,'If you want to continue the search, type /start');
 							flag =1;
@@ -94,7 +93,7 @@ function state(ctx,id){
 async function strt(ctx,id){
 	for (let i = 0; i < 3000; i++) {
 		var x = state(ctx, id);
-		await sleep(30000);
+		await sleep(60000);
 		if(x>0){
 			break;
 		}
